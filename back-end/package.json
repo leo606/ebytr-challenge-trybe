@@ -1,10 +1,15 @@
 {
   "name": "back-end",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./src/api/server.js",
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.2",
     "mongodb": "^4.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-trybe-backend": "^1.0.4"
   }
 }
