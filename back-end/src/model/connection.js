@@ -11,7 +11,7 @@ let conn = null;
 
 module.exports = async () => {
   if (conn) return conn;
-  MongoClient.connect(DB_URL, DB_OPTS).then((connection) => {
+  return MongoClient.connect(DB_URL, DB_OPTS).then((connection) => {
     conn = connection.db(DB_NAME);
     return conn;
   });
