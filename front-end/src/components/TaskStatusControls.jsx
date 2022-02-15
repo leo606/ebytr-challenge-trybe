@@ -13,7 +13,9 @@ function TaskStatusControls({ status, taskId }) {
     try {
       await axios.put(`${PUT_STATUS_ENDPOINT}/${taskId}`, { status: newStatus });
 
-      setTasks([]);
+      setTasks((prevState) => (
+        prevState.map((task) => (task.id === taskId ? { ...task, status: newStatus } : task))
+      ));
     } catch (e) {
       console.log(e);
     }
