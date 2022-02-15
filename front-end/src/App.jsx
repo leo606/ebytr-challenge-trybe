@@ -1,12 +1,16 @@
 import React from 'react';
-import Provider from './context/Provider';
+import { Routes, Route } from 'react-router-dom';
+
 import Login from './pages/Login';
+import Tasks from './pages/Tasks';
 
 function App() {
   return (
-    <Provider>
-      <Login />
-    </Provider>
+    <Routes>
+      <Route exact path="/tasks" element={<Tasks />} />
+      <Route exact path="/login" element={<Login />} />
+      <Route exact path="/" element={<Login />} />
+    </Routes>
   );
 }
 

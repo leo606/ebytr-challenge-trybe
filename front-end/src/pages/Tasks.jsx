@@ -1,14 +1,8 @@
-import React, { useContext } from 'react';
-import AppContext from '../context/AppContext';
+import React from 'react';
 
 function Tasks() {
-  const { tasks } = useContext(AppContext);
   return (
-    <main>
-      <ul>
-        {tasks.map((t) => <li>{t}</li>)}
-      </ul>
-    </main>
+    <h1>tasks</h1>
   );
 }
 

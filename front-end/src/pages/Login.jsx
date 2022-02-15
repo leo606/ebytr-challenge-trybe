@@ -1,30 +1,33 @@
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import AppContext from '../context/AppContext';
 
 const LOGIN_ENDPOINT = 'http://localhost:3001/login';
 
 function Login() {
-  const [formData, setFormData] = useState({
-    user: '',
-  });
+  const [formData, setFormData] = useState({ user: '' });
   const { setUser, setTasks } = useContext(AppContext);
+  const navigate = useNavigate();
 
   function handleChange({ target: { name, value } }) {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
   }
 
-  function postLogin() {
+  async function postLogin(event) {
+    event.preventDefault();
     try {
-      const res = axios.post(LOGIN_ENDPOINT, formData);
+      const res = await axios.post(LOGIN_ENDPOINT, formData);
       setUser({ id: res.data.id, user: res.data.user });
       setTasks(res.data.tasks);
+      navigate('/tasks');
     } catch (e) {
       console.log(e);
     }
   }
   return (
     <form onSubmit={postLogin}>
+      <h1>login</h1>
       <label htmlFor="user-input">
         <input
           type="text"
@@ -37,7 +40,7 @@ function Login() {
       </label>
       <button
         type="submit"
-        disabled={!formData.length}
+        disabled={!formData.user.length}
       >
         Entrar
       </button>
