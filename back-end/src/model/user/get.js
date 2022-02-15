@@ -3,8 +3,8 @@ const connection = require("../connection");
 module.exports = async (user) => {
   try {
     const db = await connection();
-    const create = await db.collection("users").insertOne({ user });
-    return create;
+    const userInDb = await db.collection("users").findOne({ user });
+    return userInDb;
   } catch (e) {
     console.log(e);
   }
