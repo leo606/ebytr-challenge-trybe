@@ -1,21 +1,38 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { string } from 'prop-types';
+import axios from 'axios';
 
-function TaskStatusControls({ status }) {
-  function handleStatus({ target }) {
-    console.log(target.name);
+import AppContext from '../context/AppContext';
+
+const PUT_STATUS_ENDPOINT = 'http://localhost:3001/task';
+
+function TaskStatusControls({ status, taskId }) {
+  const { setTasks } = useContext(AppContext);
+
+  async function putStatus({ target: { name: newStatus } }) {
+    try {
+      await axios.put(`${PUT_STATUS_ENDPOINT}/${taskId}`);
+
+      setTasks((prevState) => prevState.map((task) => (
+        task.id === taskId ? { ...task, status: newStatus } : task
+      )));
+    } catch (e) {
+      console.log(e);
+    }
   }
+
   return (
     <div>
-      {status !== 'pendente' && <button type="button" onClick={handleStatus} name="pendente">pendente</button> }
-      {status !== 'em andamento' && <button type="button" onClick={handleStatus} name="em andamento">em andamento</button> }
-      {status !== 'feito' && <button type="button" onClick={handleStatus} name="feito">feito</button> }
+      {status !== 'pendente' && <button type="button" onClick={putStatus} name="pendente">pendente</button> }
+      {status !== 'em andamento' && <button type="button" onClick={putStatus} name="em andamento">em andamento</button> }
+      {status !== 'feito' && <button type="button" onClick={putStatus} name="feito">feito</button> }
     </div>
   );
 }
 
 TaskStatusControls.propTypes = {
   status: string.isRequired,
+  taskId: string.isRequired,
 };
 
 export default TaskStatusControls;

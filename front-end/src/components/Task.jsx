@@ -9,7 +9,7 @@ function Task({ task }) {
       <p>{task.task}</p>
       <span>{task.status}</span>
       <p>{new Date(task.date).toLocaleDateString('pt-br')}</p>
-      <TaskStatusControls status={task.status} />
+      <TaskStatusControls status={task.status} taskId={task.id} />
     </div>
   );
 }

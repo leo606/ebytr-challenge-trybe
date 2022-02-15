@@ -10,7 +10,7 @@ function Tasks() {
     <>
       <h1>tasks</h1>
       <h1>{user.user}</h1>
-      {tasks.map(({ _id: id, ...task }) => <Task key={id} task={task} />)}
+      {tasks.map(({ _id: id, ...task }) => <Task key={id} task={{ id, ...task }} />)}
     </>
   );
 }
