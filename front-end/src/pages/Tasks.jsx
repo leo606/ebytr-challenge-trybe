@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import AppContext from '../context/AppContext';
 
+import Task from '../components/Task';
+
 function Tasks() {
   const { user, tasks } = useContext(AppContext);
 
@@ -8,9 +10,7 @@ function Tasks() {
     <>
       <h1>tasks</h1>
       <h1>{user.user}</h1>
-      <ul>
-        {tasks.map((t) => <li>{t.tasks}</li>)}
-      </ul>
+      {tasks.map(({ _id: id, ...task }) => <Task key={id} task={task} />)}
     </>
   );
 }

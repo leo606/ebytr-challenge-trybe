@@ -1,0 +1,23 @@
+[
+  {
+    "_id": "620bdd0316d9f71b774c9cf8",
+    "user": "abc",
+    "task": "one",
+    "date": "2022-02-15T17:04:03.809Z",
+    "status": "pendente"
+  },
+  {
+    "_id": "620bdd0316d9f71b774c9cf9",
+    "user": "abc",
+    "task": "two",
+    "date": "2022-02-15T17:04:03.809Z",
+    "status": "em andamento"
+  },
+  {
+    "_id": "620bdd0316d9f71b774c9cfa",
+    "user": "abc",
+    "task": "three",
+    "date": "2022-02-15T17:04:03.809Z",
+    "status": "feito"
+  }
+]

@@ -1,0 +1,27 @@
+// MongoDB Playground
+// To disable this template go to Settings | MongoDB | Use Default Template For Playground.
+// Make sure you are connected to enable completions and to be able to run a playground.
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// Select the database to use.
+use('ebytr-tasks');
+
+// The drop() command destroys all data from a collection.
+// Make sure you run it against the correct database and collection.
+db.tasks.drop();
+db.users.drop();
+
+// Insert a few documents into the sales collection.
+db.users.insertMany([
+  { 'user': 'abc' },
+  { 'user': 'def' },
+  { 'user': 'ghi' },
+]);
+
+db.tasks.insertMany([
+  { 'user': 'abc', 'task': 'one', 'date': new Date(Date.now()), 'status': 'pendente' },
+  { 'user': 'abc', 'task': 'two', 'date': new Date(Date.now()), 'status': 'em andamento' },
+  { 'user': 'abc', 'task': 'three', 'date': new Date(Date.now()), 'status': 'feito' },
+  { 'user': 'def', 'task': 'four', 'date': new Date(Date.now()), 'status': 'pendente' },
+  { 'user': 'def', 'task': 'five', 'date': new Date(Date.now()), 'status': 'pendente' },
+]);
