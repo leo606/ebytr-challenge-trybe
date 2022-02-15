@@ -3,9 +3,12 @@ import { node } from 'prop-types';
 import AppContext from './AppContext';
 
 function Provider({ children }) {
-  const [state1, setState1] = useState('context test');
+  const [user, setUser] = useState('context test');
+  const [tasks, setTasks] = useState('context test');
 
-  const contextValue = useMemo(() => ({ state1, setState1 }), [state1]);
+  const contextValue = useMemo(() => ({
+    user, setUser, tasks, setTasks,
+  }), [user, tasks]);
 
   return (
     <AppContext.Provider value={contextValue}>

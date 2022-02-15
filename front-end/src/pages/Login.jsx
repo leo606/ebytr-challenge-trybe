@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import AppContext from '../context/AppContext';
 
 const LOGIN_ENDPOINT = 'http://localhost:3001/login';
 
@@ -7,6 +8,7 @@ function Login() {
   const [formData, setFormData] = useState({
     user: '',
   });
+  const { setUser, setTasks } = useContext(AppContext);
 
   function handleChange({ target: { name, value } }) {
     setFormData((prevState) => ({ ...prevState, [name]: value }));
@@ -15,7 +17,8 @@ function Login() {
   function postLogin() {
     try {
       const res = axios.post(LOGIN_ENDPOINT, formData);
-      console.log(res.data);
+      setUser({ id: res.data.id, user: res.data.user });
+      setTasks(res.data.tasks);
     } catch (e) {
       console.log(e);
     }
@@ -32,7 +35,12 @@ function Login() {
           onChange={handleChange}
         />
       </label>
-      <button type="submit">Entrar</button>
+      <button
+        type="submit"
+        disabled={!formData.length}
+      >
+        Entrar
+      </button>
     </form>
   );
 }
