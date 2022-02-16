@@ -5,15 +5,13 @@ import { render } from "@testing-library/react";
 import AppContext from "../../context/AppContext";
 
 const renderWithRouter = (Component, path, contextValue) => {
-  const history = createMemoryHistory();
+  const history = createMemoryHistory({ initialEntries: [path] });
 
   return {
     ...render(
       <AppContext.Provider value={contextValue}>
-        <BrowserRouter>
-          <Routes>
-            <Route exact path={path} element={<Component />} />
-          </Routes>
+        <BrowserRouter history={history}>
+          <Component />
         </BrowserRouter>
       </AppContext.Provider>
     ),
