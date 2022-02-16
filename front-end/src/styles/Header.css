@@ -1,0 +1,9 @@
+header {
+  padding: 1em 3em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #081820;
+  color: #e0f8d0;
+  box-shadow: 0 1px 6px #081820;
+}
