@@ -27,16 +27,6 @@ describe("put task status", () => {
   describe("when status is not informed", () => {
     let response;
     before(async () => {
-      const usersCollection = await connectionMock
-        .db("ebytr-tasks")
-        .collection("users");
-      const taskCollection = await connectionMock
-        .db("ebytr-tasks")
-        .collection("tasks");
-
-      await usersCollection.insertMany(usersMock);
-      await taskCollection.insertMany(tasksMock);
-
       response = await chai.request(server).put("/task/1").send({});
     });
 
@@ -50,6 +40,37 @@ describe("put task status", () => {
 
     it("error message have text: status is required ", () => {
       expect(response.body).to.have.property("message", "status is required");
+    });
+  });
+
+  describe("when status is informed return 200 ok", () => {
+    let response;
+    let usersCollection;
+    let taskCollection;
+    before(async () => {
+      usersCollection = await connectionMock
+        .db("ebytr-tasks")
+        .collection("users");
+      taskCollection = await connectionMock
+        .db("ebytr-tasks")
+        .collection("tasks");
+
+      await usersCollection.insertMany(usersMock);
+      await taskCollection.insertMany(tasksMock);
+      const taskInDb = await taskCollection.findOne();
+
+      response = await chai
+        .request(server)
+        .put(`/task/${taskInDb._id}`)
+        .send({ status: "em andamento" });
+    });
+    after(async () => {
+      await usersCollection.drop();
+      await taskCollection.drop();
+    });
+
+    it("returns status code 200", async () => {
+      expect(response).to.have.status(200);
     });
   });
 });
