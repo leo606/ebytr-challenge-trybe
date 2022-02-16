@@ -1,19 +1,29 @@
+/* eslint-disable */
 import React, { useContext } from 'react';
 import AppContext from '../context/AppContext';
 
 import Task from '../components/Task';
 import NewTaskForm from '../components/NewTaskForm';
+import SortingForm from '../components/SortingForm';
+import '../styles/Tasks.css';
+import sortingCallbacks from '../helpers/sortingCallbacks';
 
 function Tasks() {
-  const { user, tasks } = useContext(AppContext);
+  const { tasks, sorting } = useContext(AppContext);
 
   return (
-    <>
+    <main className="tasks">
       <h1>tasks</h1>
-      <h1>{user.user}</h1>
+      <SortingForm />
       <NewTaskForm />
-      {tasks.map((task) => <Task key={task.id} task={task} />)}
-    </>
+      <div className="tasks-list">
+        {
+          tasks
+            .sort(sortingCallbacks[sorting])
+            .map((task) => <Task key={task.id} task={task} />)
+        }
+      </div>
+    </main>
   );
 }
 

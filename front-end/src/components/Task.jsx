@@ -5,7 +5,7 @@ import TaskStatusControls from './TaskStatusControls';
 
 function Task({ task }) {
   return (
-    <div>
+    <div className="task-container" key={task.id}>
       <p>{task.task}</p>
       <span>{task.status}</span>
       <p>{new Date(task.date).toLocaleDateString('pt-br')}</p>

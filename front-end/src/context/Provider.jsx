@@ -5,10 +5,11 @@ import AppContext from './AppContext';
 function Provider({ children }) {
   const [user, setUser] = useState('context test');
   const [tasks, setTasks] = useState('context test');
+  const [sorting, setSorting] = useState('date');
 
   const contextValue = useMemo(() => ({
-    user, setUser, tasks, setTasks,
-  }), [user, tasks]);
+    user, setUser, tasks, setTasks, sorting, setSorting,
+  }), [user, tasks, sorting]);
 
   return (
     <AppContext.Provider value={contextValue}>

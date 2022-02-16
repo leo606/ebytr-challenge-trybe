@@ -24,7 +24,7 @@ function NewTaskForm() {
     }
   }
   return (
-    <form onSubmit={submitTask}>
+    <form onSubmit={submitTask} className="new-task-form">
       <textarea name="task" id="task-textarea" cols="30" rows="10" onChange={handleChange} />
       <button type="submit">Salvar</button>
       {warning && <span>Tente novamente</span>}
