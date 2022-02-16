@@ -1,15 +1,12 @@
 const chai = require("chai");
 const sinon = require("sinon");
 const chaiHttp = require("chai-http");
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 
 const server = require("../api/app");
 const { getConnection } = require("./mocks/connectionMock");
 
 const { expect } = chai;
-
-const usersMock = require("./mocks/userMock.json");
-const tasksMock = require("./mocks/tasksMock.json");
 
 chai.use(chaiHttp);
 
@@ -39,7 +36,10 @@ describe("post task", () => {
     });
 
     it("error message have text: task and user is required ", () => {
-      expect(response.body).to.have.property("message", "task and user is required");
+      expect(response.body).to.have.property(
+        "message",
+        "task and user is required"
+      );
     });
   });
 
@@ -59,7 +59,6 @@ describe("post task", () => {
     });
 
     after(async () => {
-      await usersCollection.drop();
       await taskCollection.drop();
     });
 
@@ -67,13 +66,21 @@ describe("post task", () => {
       expect(response).to.have.status(200);
     });
 
-    it("return new task id", () => {
+    it("return new task data", () => {
       expect(response.body).to.have.property("id");
+      expect(response.body).to.have.property("task", "new task");
+      expect(response.body).to.have.property("user", "abc");
+      expect(response.body).to.have.property("status", "pendente");
     });
 
     it("task is saved in DB", async () => {
-      const newTask = taskCollection.findOne({ _id: response.body.id });
+      const newTask = await taskCollection.findOne({
+        _id: ObjectId(response.body.id),
+      });
+
+      expect(newTask).to.have.property("user", "abc");
       expect(newTask).to.have.property("task", "new task");
+      expect(newTask).to.have.property("status", "pendente");
     });
   });
 });
