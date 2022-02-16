@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import AppContext from '../context/AppContext';
-import './Login.css';
+import '../styles/Login.css';
 
 const LOGIN_ENDPOINT = 'http://localhost:3001/login';
 
@@ -29,9 +29,10 @@ function Login() {
   }
   return (
     <main>
-      <form onSubmit={postLogin}>
-        <h1>login</h1>
+      <form className="login-form" onSubmit={postLogin}>
+        <h1>Login</h1>
         <label htmlFor="user-input">
+          Username:
           <input
             type="text"
             name="user"
