@@ -66,10 +66,16 @@ describe("post login", () => {
       expect(response).to.have.status(200);
     });
 
-    it("returns user object", () => {
+    it("returns user object with correct values", () => {
+      const user0Tasks = tasksMock
+        .filter((task) => task.user === usersMock[0].user)
+        .map(({ _id, ...task }) => ({ id: _id, ...task }))
+
       expect(response.body).to.have.property("user", usersMock[0].user);
       expect(response.body).to.have.property("id", usersMock[0]._id);
-      expect(response.body).to.have.property("tasks");
+      expect(response.body)
+        .to.have.property("tasks")
+        .to.have.length(user0Tasks.length);
     });
   });
 });
