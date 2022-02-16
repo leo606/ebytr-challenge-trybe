@@ -14,7 +14,7 @@ module.exports = async (req, res, next) => {
       return next(newTask.err);
     }
 
-    res.statusCodes(statusCodes.ok).json(newTask);
+    res.status(statusCodes.ok).json(newTask);
   } catch (e) {
     console.log();
   }

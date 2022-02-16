@@ -38,8 +38,8 @@ describe("post task", () => {
       expect(response.body).to.have.property("message");
     });
 
-    it("error message have text: task is required ", () => {
-      expect(response.body).to.have.property("message", "task is required");
+    it("error message have text: task and user is required ", () => {
+      expect(response.body).to.have.property("message", "task and user is required");
     });
   });
 
