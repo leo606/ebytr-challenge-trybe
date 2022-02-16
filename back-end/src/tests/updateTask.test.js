@@ -13,7 +13,7 @@ const tasksMock = require("./mocks/tasksMock.json");
 
 chai.use(chaiHttp);
 
-describe("post login", () => {
+describe("put task status", () => {
   let connectionMock;
   before(async () => {
     connectionMock = await getConnection();
@@ -24,10 +24,10 @@ describe("post login", () => {
     MongoClient.connect.restore();
   });
 
-  describe("when user is not informed", () => {
+  describe("when status is not informed", () => {
     let response;
     before(async () => {
-      response = await chai.request(server).post("/login").send({});
+      response = await chai.request(server).put("/task/1").send({});
     });
 
     it("returns status code 400", () => {
@@ -38,42 +38,39 @@ describe("post login", () => {
       expect(response.body).to.have.property("message");
     });
 
-    it("error message have text: user is required ", () => {
-      expect(response.body).to.have.property("message", "user is required");
+    it("error message have text: status is required ", () => {
+      expect(response.body).to.have.property("message", "status is required");
     });
   });
 
-  describe("when user is correct", () => {
+  describe("when status is informed return 200 ok", () => {
     let response;
+    let usersCollection;
+    let taskCollection;
     before(async () => {
-      const usersCollection = await connectionMock
+      usersCollection = await connectionMock
         .db("ebytr-tasks")
         .collection("users");
-      const taskCollection = await connectionMock
+      taskCollection = await connectionMock
         .db("ebytr-tasks")
         .collection("tasks");
 
       await usersCollection.insertMany(usersMock);
       await taskCollection.insertMany(tasksMock);
+      const taskInDb = await taskCollection.findOne();
 
       response = await chai
         .request(server)
-        .post("/login")
-        .send({ user: "abc" });
+        .put(`/task/${taskInDb._id}`)
+        .send({ status: "em andamento" });
+    });
+    after(async () => {
+      await usersCollection.drop();
+      await taskCollection.drop();
     });
 
-    it("returns status code 200", () => {
+    it("returns status code 200", async () => {
       expect(response).to.have.status(200);
-    });
-
-    it("returns user object with correct values", () => {
-      const user0Tasks = tasksMock
-        .filter((task) => task.user === usersMock[0].user)
-        .map(({ _id, ...task }) => ({ id: _id, ...task }));
-
-      expect(response.body).to.have.property("user", usersMock[0].user);
-      expect(response.body).to.have.property("id");
-      expect(response.body).to.have.property("tasks");
     });
   });
 });
