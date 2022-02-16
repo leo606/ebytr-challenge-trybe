@@ -7,6 +7,7 @@ const LOGIN_ENDPOINT = 'http://localhost:3001/login';
 
 function Login() {
   const [formData, setFormData] = useState({ user: '' });
+  const [warning, setWarning] = useState(false);
   const { setUser, setTasks } = useContext(AppContext);
   const navigate = useNavigate();
 
@@ -22,7 +23,7 @@ function Login() {
       setTasks(res.data.tasks);
       navigate('/tasks');
     } catch (e) {
-      console.log(e);
+      setWarning(true);
     }
   }
   return (
@@ -44,6 +45,7 @@ function Login() {
       >
         Entrar
       </button>
+      {warning && <span>Tente novamente</span>}
     </form>
   );
 }
