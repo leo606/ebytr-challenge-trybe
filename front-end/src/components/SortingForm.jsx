@@ -19,7 +19,7 @@ function SortingForm() {
     <form onSubmit={submitSorting} className="sorting-form">
       <div>
         <label htmlFor="sort-name">
-          Ordem Alfabética
+          Task
           <input type="radio" name="sort" value="name" id="sort-name" onChange={handleChange} />
         </label>
         <label htmlFor="sort-date">

@@ -22,7 +22,7 @@ function TaskStatusControls({ status, taskId }) {
   }
 
   return (
-    <div>
+    <div className="task-status-control">
       {status !== 'pendente' && <button type="button" onClick={putStatus} name="pendente">pendente</button> }
       {status !== 'em andamento' && <button type="button" onClick={putStatus} name="em andamento">em andamento</button> }
       {status !== 'feito' && <button type="button" onClick={putStatus} name="feito">feito</button> }
