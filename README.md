@@ -85,7 +85,7 @@ Do diretório raiz do projeto entre do diretório `front-end`
 Inicie o servidor `front-end`
 
 ```bash
-  cd front-end
+  npm start
 ```
 ## Screenshots
 
