@@ -76,7 +76,7 @@ Do diretório raiz do projeto inicie o servidor com
 
 ### Inicie o servidor front-end:
 
-Do diretório raiz do projeto entre do diretório `front-end`
+Do diretório raiz do projeto entre no diretório `front-end`
 
 ```bash
   cd front-end
