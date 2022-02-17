@@ -19,13 +19,14 @@ function NewTaskForm() {
       const data = { ...formData, user: user.user };
       const res = await axios.post(TASK_ENDPOINT, data);
       setTasks((prevState) => [...prevState, res.data]);
+      setFormData((prevState) => ({ ...prevState, task: '' }));
     } catch (e) {
       setWarning(true);
     }
   }
   return (
     <form onSubmit={submitTask} className="new-task-form">
-      <textarea name="task" id="task-textarea" cols="30" rows="10" onChange={handleChange} />
+      <textarea name="task" id="task-textarea" cols="30" rows="10" value={formData.task} onChange={handleChange} />
       <button type="submit">Salvar</button>
       {warning && <span>Tente novamente</span>}
     </form>
