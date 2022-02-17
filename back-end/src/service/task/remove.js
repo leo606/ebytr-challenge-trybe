@@ -4,13 +4,13 @@ const err = {
   err: { code: "internalServerError", message: "something went wrong" },
 };
 
-module.exports = async (id, status) => {
+module.exports = async (id) => {
   try {
-    const updated = await taskModel.update(id, { status });
-    if (updated.acknowledged) {
-      return updated.acknowledged;
+    const removed = await taskModel.remove(id);
+    if (removed.acknowledged) {
+      return removed.acknowledged;
     }
-    return err;
+    return err
   } catch (e) {
     console.log(e);
     return err;
