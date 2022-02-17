@@ -11,6 +11,34 @@
   text-align: center;
 }
 
+.sorting-form {
+  margin-bottom: 1em;
+}
+
+.sorting-form div {
+  display: flex;
+  justify-content: center;
+}
+
+.sorting-form label {
+  display: flex;
+  align-items: center;
+  margin: 0 .5em;
+}
+
+.sorting-form label input {
+  margin: 0 .2em;
+}
+
+.sorting-form button {
+  background-color: #346856;
+  color: #e0f8d0;
+  font-weight: 600;
+  border: none;
+  border-radius: 3px;
+  height: 2em;
+}
+
 .new-task-form {
   display: flex;
   flex-direction: column;
@@ -38,9 +66,27 @@
   padding: .5em;
   margin: .5em;
   border-radius: 6px;
-  box-shadow: 0 0 6px -1px #081820;
-  background-color: #88c070;
+  box-shadow: 0 0 6px -2px #081820;
+  background-color: #e0f8d0;
 }
+
+.task-text {
+  margin-bottom: .5em;
+}
+
+.task-container p {
+  margin-bottom: 1em;
+}
+
+.task-container span {
+  font-size: .9em;
+  margin-right: 1em;
+  background-color: #88c070;
+  color: #081820;
+  border-radius: 3px;
+  padding: 0 .3em;
+}
+
 
 .task-status-control {
   display: flex;

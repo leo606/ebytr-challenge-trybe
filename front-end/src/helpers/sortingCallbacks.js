@@ -21,14 +21,13 @@ function date(a, b) {
 function status(a, b) {
   const statusA = a.status.toLowerCase();
   const statusB = b.status.toLowerCase();
+  const importance = {
+    pendente: 1,
+    'em andamento': 2,
+    feito: 3,
+  };
 
-  if (statusA < statusB) {
-    return -1;
-  }
-  if (statusA > statusB) {
-    return 1;
-  }
-  return 0;
+  return importance[statusA] - importance[statusB];
 }
 
 export default {

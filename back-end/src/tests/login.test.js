@@ -45,11 +45,13 @@ describe("post login", () => {
 
   describe("when user is correct", () => {
     let response;
+    let taskCollection;
+    let usersCollection;
     before(async () => {
-      const usersCollection = await connectionMock
+      usersCollection = await connectionMock
         .db("ebytr-tasks")
         .collection("users");
-      const taskCollection = await connectionMock
+      taskCollection = await connectionMock
         .db("ebytr-tasks")
         .collection("tasks");
 
@@ -60,6 +62,10 @@ describe("post login", () => {
         .request(server)
         .post("/login")
         .send({ user: "abc" });
+    });
+    after(async () => {
+      await taskCollection.drop();
+      await usersCollection.drop();
     });
 
     it("returns status code 200", () => {
@@ -72,6 +78,36 @@ describe("post login", () => {
         .map(({ _id, ...task }) => ({ id: _id, ...task }));
 
       expect(response.body).to.have.property("user", usersMock[0].user);
+      expect(response.body).to.have.property("id");
+      expect(response.body).to.have.property("tasks");
+    });
+  });
+
+  describe("when is new user", () => {
+    let response;
+    let usersCollection;
+    before(async () => {
+      usersCollection = await connectionMock
+        .db("ebytr-tasks")
+        .collection("users");
+
+      await usersCollection.insertMany(usersMock);
+
+      response = await chai
+        .request(server)
+        .post("/login")
+        .send({ user: "thisisanewuser" });
+    });
+    after(async () => {
+      await usersCollection.drop();
+    });
+
+    it("returns status code 200", () => {
+      expect(response).to.have.status(200);
+    });
+
+    it("returns user object with correct values", () => {
+      expect(response.body).to.have.property("user", "thisisanewuser");
       expect(response.body).to.have.property("id");
       expect(response.body).to.have.property("tasks");
     });
