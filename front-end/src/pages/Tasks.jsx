@@ -13,7 +13,7 @@ function Tasks() {
 
   return (
     <main className="tasks">
-      <h1>tasks</h1>
+      <h1>Tasks</h1>
       <SortingForm />
       <NewTaskForm />
       <div className="tasks-list">

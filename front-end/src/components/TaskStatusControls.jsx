@@ -21,11 +21,21 @@ function TaskStatusControls({ status, taskId }) {
     }
   }
 
+  async function deleteTask() {
+    try {
+      await axios.delete(`${PUT_STATUS_ENDPOINT}/${taskId}`);
+
+      setTasks((prevState) => prevState.filter((task) => task.id === taskId));
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   return (
     <div className="task-status-control">
-      {status !== 'pendente' && <button type="button" onClick={putStatus} name="pendente">pendente</button> }
-      {status !== 'em andamento' && <button type="button" onClick={putStatus} name="em andamento">em andamento</button> }
-      {status !== 'feito' && <button type="button" onClick={putStatus} name="feito">feito</button> }
+      {status === 'pendente' && <button type="button" onClick={putStatus} name="em andamento">em andamento</button> }
+      {status === 'em andamento' && <button type="button" onClick={putStatus} name="feito">feito</button> }
+      <button type="button" onClick={deleteTask} name="delete">remover</button>
     </div>
   );
 }
