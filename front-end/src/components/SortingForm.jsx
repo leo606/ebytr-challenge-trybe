@@ -30,8 +30,8 @@ function SortingForm() {
           Status
           <input type="radio" name="sort" value="status" id="sort-status" onChange={handleChange} />
         </label>
+        <button type="submit">Ordenar</button>
       </div>
-      <button type="submit">Ordenar</button>
     </form>
   );
 }
