@@ -24,6 +24,7 @@ Projeto desenvolvido como desafio de processo seletivo da Ebytr
 **Back-end:** Node, Express
 
 **Database:** MongoDB
+
 ## Rodando localmente
 
 **Pre-requisitos:** MongoDB, node, npm
@@ -88,9 +89,20 @@ Inicie o servidor `front-end`
 ```
 ## Screenshots
 
+### Home Page
 ![App Screenshot](images/web_home.png)
+### Tasks Page
 ![App Screenshot](images/web_tasks.png)
+### Tests back-end
 ![App back-end Tests](images/tests_back.png)
+### Tests front-end
+![App front-end Tests](images/tests_front.png)
+
+## Próximos Passos
+
+- Maior cobertura de testes, pricipalmente do front-end
+- Cadastro e autenticação de pessoas
+- Funcionalidade de editar uma tarefa
 
 ## 🔗 Entre em contato
 [![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](http://leo606.github.io/)
