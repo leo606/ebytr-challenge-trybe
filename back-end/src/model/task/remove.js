@@ -12,5 +12,6 @@ module.exports = async (id) => {
     return deleted;
   } catch (e) {
     console.log(e);
+    return false;
   }
 };
