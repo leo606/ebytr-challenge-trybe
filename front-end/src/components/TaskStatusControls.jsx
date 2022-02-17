@@ -25,7 +25,7 @@ function TaskStatusControls({ status, taskId }) {
     try {
       await axios.delete(`${PUT_STATUS_ENDPOINT}/${taskId}`);
 
-      setTasks((prevState) => prevState.filter((task) => task.id === taskId));
+      setTasks((prevState) => prevState.filter((task) => task.id !== taskId));
     } catch (e) {
       console.log(e);
     }
